@@ -6,29 +6,25 @@ import {
   SafeAreaView,
   Image,
   StatusBar,
+  TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native';
 import {styles} from './styles';
 import LinearGradient from 'react-native-linear-gradient';
+import {Input, Box} from 'native-base';
+import Header from '../../components/Header';
+import TaskList from '../../components/List';
+import BottomNav from '../../components/BottomNav';
 
-export default function Home() {
+export default function Home({navigation}) {
+  const [value, setValue] = React.useState('');
+  const handleChange = text => setValue(text);
   return (
     <>
-      <StatusBar translucent backgroundColor="transparent"></StatusBar>
       <ScrollView contentContainerStyle={styles.scrollView}>
-        <LinearGradient
-          colors={['#0c798f', '#2dc0de']}
-          style={styles.linearGradient}>
-          <View style={styles.hederContainer}>
-            <Image style={styles.profileImg}></Image>
-            <View style={styles.nameContainer}>
-              <Text style={styles.greet}>Hello</Text>
-              <Text style={styles.name}>John Doe</Text>
-            </View>
-          </View>
-        </LinearGradient>
-        <View>
-          <Text>Tasks</Text>
-        </View>
+        <Header />
+        <TaskList navigation={navigation} />
+        <BottomNav navigation={navigation} />
       </ScrollView>
     </>
   );
